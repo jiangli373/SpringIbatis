@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap        
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"        
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">  
+  
+<sqlMap namespace="stu">  
+    <resultMap class="com.jiangli.demo.Student" id="Student">  
+        <result property="id" column="id" javaType="java.lang.Integer" />  
+        <result property="name" column="name" />  
+        <result property="age" column="age" javaType="java.lang.Integer" />  
+        <result property="tel" column="tel" />  
+        <result property="address" column="address" />  
+    </resultMap>  
+    <select id="findAllStudent" resultMap="Student">  
+        select * from student  
+    </select>  
+</sqlMap>  

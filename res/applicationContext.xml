@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"   
+"http://www.springframework.org/dtd/spring-beans.dtd">  
+<beans>  
+    <!-- 配置数据源 -->  
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"  
+        destroy-method="close">  
+        <property name="driverClassName" value="${jdbc.driverClassName}" />  
+        <property name="url" value="${jdbc.url}" />  
+        <property name="username" value="${jdbc.username}" />  
+        <property name="password" value="${jdbc.password}" />  
+    </bean>  
+    <!-- 结束 -->  
+  
+  
+    <!-- 加载属性文件 -->  
+    <bean id="propertyConfigurer"  
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
+        <property name="locations">  
+            <list>  
+                <value>  
+                    database.properties  
+                </value>  
+            </list>  
+        </property>  
+    </bean>  
+    <!--结束  -->  
+  
+    <!-- ibatis配置 -->  
+    <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">  
+        <property name="configLocation" value="sql-map-config.xml">  
+        </property>  
+        <property name="dataSource" ref="dataSource" />  
+    </bean>  
+    <!-- 结束 -->  
+  
+    <!-- DAO配置 -->  
+    <bean id="StudentDao" class="com.jiangli.demo.StudentDao">  
+        <property name="sqlMapClient" ref="sqlMapClient" />  
+    </bean>  
+    <!-- 结束 -->  
+</beans>  
